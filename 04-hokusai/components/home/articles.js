@@ -10,7 +10,11 @@ const Articles = (props) => {
 
   return (
     <>
-      <Masonry breakpointCols={breakpoints} className='my-masonry-grid' columnClassName='my-masonry-grid_column'>
+      <Masonry
+        breakpointCols={breakpoints}
+        className='my-masonry-grid'
+        columnClassName='my-masonry-grid_column'
+      >
         {props.data.map((article) => (
           <Card key={article.id} article={article} />
         ))}

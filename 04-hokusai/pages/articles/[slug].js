@@ -4,7 +4,12 @@ import Image from 'next/image'
 const ArticlePage = ({ data }) => {
   return (
     <div>
-      <Image src={`/images/arts/${data.img}`} layout='responsive' width='1920' height='1080' />
+      <Image
+        src={`/images/arts/${data.img}`}
+        layout='responsive'
+        width='1920'
+        height='1080'
+      />
 
       <div className='article_container'>
         <h1>{data.name}</h1>
@@ -15,8 +20,7 @@ const ArticlePage = ({ data }) => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const data = await getJsonData()
-  const articles = data.articles
+  const { articles } = await getJsonData()
 
   let articleData = articles.find((article) => article.slug === params.slug)
 
@@ -28,8 +32,8 @@ export const getStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths = async () => {
-  const data = await getJsonData()
-  const paths = data.articles.map((article) => ({
+  const { articles } = await getJsonData()
+  const paths = articles.map((article) => ({
     params: { slug: article.slug },
   }))
 

@@ -24,7 +24,12 @@ const BioPage = ({ bioData }) => {
       </div>
       <div className='col-lg-4'>
         <div className='card mb-4'>
-          <Image src={`/images/bio/bio.jpg`} layout='responsive' width='720' height='1024' />
+          <Image
+            src={`/images/bio/bio.jpg`}
+            layout='responsive'
+            width='720'
+            height='1024'
+          />
         </div>
       </div>
     </div>
@@ -32,7 +37,9 @@ const BioPage = ({ bioData }) => {
 }
 
 export const getStaticProps = async () => {
-  const bioData = await axios.get('https://baconipsum.com/api/?type=all-meat&paras=5')
+  const bioData = await axios.get(
+    'https://baconipsum.com/api/?type=all-meat&paras=5'
+  )
 
   if (!bioData.data) {
     return {

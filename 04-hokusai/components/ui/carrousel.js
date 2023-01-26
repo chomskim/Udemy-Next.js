@@ -3,8 +3,8 @@ import 'slick-carousel/slick/slick-theme.css'
 
 import Slider from 'react-slick'
 
-const CarrouselComp = (props) => {
-  console.log(props)
+const CarrouselComp = ({ data }) => {
+  console.log(data)
 
   const settings = {
     dots: false,
@@ -17,7 +17,7 @@ const CarrouselComp = (props) => {
   return (
     <>
       <Slider {...settings}>
-        {props.data.map((slide) => (
+        {data.map((slide) => (
           <div key={slide.id}>
             <div
               className='carrousel_wrapper'

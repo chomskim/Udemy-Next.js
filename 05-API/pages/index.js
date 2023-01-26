@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 export default function Home(props) {
   const getPosts = () => {
     axios.get('/api/posts').then((response) => {
-      console.log(response.data)
+      console.log(JSON.stringify(response.data))
     })
   }
 
@@ -36,13 +36,23 @@ export default function Home(props) {
         <div>
           <label htmlFor='title'>Title</label>
           <br />
-          <input id='title' name='title' onChange={formik.handleChange} value={formik.values.title} />
+          <input
+            id='title'
+            name='title'
+            onChange={formik.handleChange}
+            value={formik.values.title}
+          />
         </div>
 
         <div>
           <label htmlFor='body'>Body</label>
           <br />
-          <input id='body' name='body' onChange={formik.handleChange} value={formik.values.body} />
+          <input
+            id='body'
+            name='body'
+            onChange={formik.handleChange}
+            value={formik.values.body}
+          />
         </div>
         <button type='submit'>Submit</button>
       </form>

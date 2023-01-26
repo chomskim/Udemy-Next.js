@@ -17,6 +17,10 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 ### Connect MongoDB
 
 ```
-mongodb+srv://admin:<password>@cluster0.a1c51.mongodb.net/?retryWrites=true&w=majority
+[.env]
+DB_PASSWORD=**************
+DB_HOST=cluster0.******.mongodb.net
+
+mongodb+srv://admin:${DB_PASSWORD}@${DB_HOST}/?retryWrites=true&w=majority
 
 ```

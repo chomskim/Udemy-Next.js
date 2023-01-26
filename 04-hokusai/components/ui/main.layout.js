@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Header from '../navigation/header'
 
-const LayoutMain = (props) => {
+const LayoutMain = ({ children }) => {
   return (
     <>
       <Head>
@@ -12,7 +12,7 @@ const LayoutMain = (props) => {
         <meta name='author' content='Francis' />
       </Head>
       <Header />
-      <div className='container'>{props.children}</div>
+      <div className='container'>{children}</div>
     </>
   )
 }

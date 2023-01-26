@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb'
 
 require('dotenv').config()
-const { DB_PASSWORD } = process.env
+const { DB_PASSWORD, DB_HOST } = process.env
 
 export async function connectToDb() {
   const dbClient = await MongoClient.connect(
