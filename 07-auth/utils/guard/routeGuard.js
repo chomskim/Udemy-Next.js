@@ -2,26 +2,29 @@ import { getSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-const RouteGuard = (props) => {
+const RouteGuard = ({ children }) => {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getSession().then((session) => {
+    const loadSession = async () => {
+      const session = await getSession()
       console.log(session)
+
       if (!session) {
         router.push('/sign_in')
       } else {
         setLoading(false)
       }
-    })
+    }
+    loadSession()
   }, [])
 
   if (loading) {
     return <div>...loading</div>
   }
 
-  return <>{props.children}</>
+  return <>{children}</>
 }
 
 export default RouteGuard

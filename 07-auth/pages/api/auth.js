@@ -20,7 +20,7 @@ const handler = async (req, res) => {
   }
 
   const mongoClient = await connectToDb()
-  const db = mongoClient.db('authpr')
+  const db = mongoClient.db('auth-pr')
 
   const checkUser = await db.collection('users').findOne({ email })
   if (checkUser) {

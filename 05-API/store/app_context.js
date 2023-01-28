@@ -5,13 +5,13 @@ export const AppContext = createContext({
   addUser: function (user) {},
 })
 
-export const AppContextProvider = (props) => {
-  const [users, dispatch] = useReducer(
-    (state, action) => {
-      return [...state, ...action]
-    },
-    [{ name: 'Francis' }]
-  )
+export const AppContextProvider = ({ children }) => {
+  const reducer = (state, action) => {
+    return [...state, ...action]
+  }
+  const initialState = [{ name: 'Francis' }]
+
+  const [users, dispatch] = useReducer(reducer, initialState)
 
   const handleAddUser = (user) => {
     dispatch([user])
@@ -24,7 +24,7 @@ export const AppContextProvider = (props) => {
         addUser: handleAddUser,
       }}
     >
-      {props.children}
+      {children}
     </AppContext.Provider>
   )
 }

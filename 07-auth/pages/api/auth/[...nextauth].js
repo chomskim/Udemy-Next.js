@@ -16,16 +16,22 @@ export default NextAuth({
         const mongoClient = await connectToDb()
 
         /// user check
-        const user = await mongoClient.db('authpr').collection('users').findOne({
-          email: credentials.email,
-        })
+        const user = await mongoClient
+          .db('auth-pr')
+          .collection('users')
+          .findOne({
+            email: credentials.email,
+          })
         if (!user) {
           mongoClient.close()
           throw new Error('Not a valid user')
         }
 
         // check pass
-        const validPass = await passwordCheck(credentials.password, user.password)
+        const validPass = await passwordCheck(
+          credentials.password,
+          user.password
+        )
         if (!validPass) {
           mongoClient.close()
           throw new Error('Wrong password')

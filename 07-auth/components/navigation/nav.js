@@ -12,13 +12,13 @@ const Navigation = () => {
           <Link href='/'>My awesome app</Link>
         </Navbar.Brand>
         <Nav className='mr-auto'>
-          {!session && status != 'loading' && (
+          {!session && status !== 'loading' && (
             <Link href='/sign_in' passHref>
               <Nav.Link>Sign in</Nav.Link>
             </Link>
           )}
 
-          {session && status != 'loading' && (
+          {session && status !== 'loading' && (
             <>
               <Link href='/sign_out' passHref>
                 <Nav.Link

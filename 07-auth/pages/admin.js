@@ -1,6 +1,7 @@
 import { getSession } from 'next-auth/react'
 
 const Admin = (props) => {
+  console.log(props)
   return (
     <>
       <h1>Admin</h1>
