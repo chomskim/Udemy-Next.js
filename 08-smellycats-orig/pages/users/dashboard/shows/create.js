@@ -20,22 +20,20 @@ const CreateShowPage = () => {
   const formik = useFormik({
     initialValues: showFields,
     validationSchema: showValidation,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true)
 
-      axios
-        .post('/api/shows/add_show', values)
-        .then(() => {
-          dispatch(successGlobal('Done, congrats !!'))
-          clearRef.current.clearPic()
-          resetForm()
-        })
-        .catch((error) => {
-          dispatch(errorGlobal(error.response.data.message))
-        })
-        .finally(() => {
-          setLoading(false)
-        })
+      try {
+        await axios.post('/api/shows/add_show', values)
+
+        dispatch(successGlobal('Done, congrats !!'))
+        clearRef.current.clearPic()
+        resetForm()
+      } catch (error) {
+        dispatch(errorGlobal(error.response.data.message))
+      } finally {
+        setLoading(false)
+      }
     },
   })
 

@@ -34,6 +34,7 @@ export const contactEmail = async (data) => {
     }
 
     let emailBody = mailGenerator.generate(email)
+    console.log(emailBody)
     let message = {
       from: 'the.coding.rev@gmail.com',
       to: 'the.coding.rev@gmail.com',
@@ -41,7 +42,7 @@ export const contactEmail = async (data) => {
       html: emailBody,
     }
 
-    await transporter.sendMail(message)
+    // await transporter.sendMail(message)
     return true
   } catch (error) {
     throw error

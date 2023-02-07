@@ -7,6 +7,7 @@ import { getAllShows } from 'database/services/show.service'
 import { toJson } from 'helpers/functions'
 
 const Home = (props) => {
+  console.log(props)
   return (
     <>
       <Featured />
@@ -20,6 +21,7 @@ export const getServerSideProps = async () => {
   await connectToDb()
   try {
     const shows = await getAllShows('_id', 'desc', 3, 0)
+    // console.log(shows)
     return { props: { shows: toJson(shows) } }
   } catch (error) {
     return { props: { shows: [] } }

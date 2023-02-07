@@ -21,21 +21,18 @@ const NewsLetter = () => {
     validationSchema: Yup.object({
       email: Yup.string().required('Sorry the email is required').email('Thin is an invalid email'),
     }),
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true)
 
-      axios
-        .post(`/api/users/newsletter`, values)
-        .then(() => {
-          dispatch(successGlobal('Thank you'))
-        })
-        .catch((error) => {
-          dispatch(errorGlobal(error.response.data.message))
-        })
-        .finally(() => {
-          resetForm()
-          setLoading(false)
-        })
+      try {
+        axios.post(`/api/users/newsletter`, values)
+        dispatch(successGlobal('Thank you'))
+      } catch (error) {
+        dispatch(errorGlobal(error.response.data.message))
+      } finally {
+        resetForm()
+        setLoading(false)
+      }
     },
   })
 

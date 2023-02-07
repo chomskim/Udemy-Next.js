@@ -15,8 +15,14 @@ function MyApp({ Component, pageProps }) {
         <SessionCheck>
           <Head>
             <title>The smelly cats</title>
-            <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-            <meta name='description' content='The homepage of the smelly cats, the greatest band in the whole world' />
+            <meta
+              name='viewport'
+              content='initial-scale=1.0, width=device-width'
+            />
+            <meta
+              name='description'
+              content='The homepage of the smelly cats, the greatest band in the whole world'
+            />
             <meta name='keywords' content='Music, shows, smelly cats' />
             <meta name='author' content='The smelly cats' />
           </Head>

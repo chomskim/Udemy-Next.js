@@ -25,8 +25,8 @@ const Shows = ({ shows }) => {
           <div className='row g-0'>
             {shows.map((show) => (
               <div className='col-md-4 col-sm-12' key={show._id}>
-                <Link href={`/show/${show.slug}`}>
-                  <a className='event-box'>
+                <Link href={`/shows/${show.slug}`}>
+                  <div className='event-box'>
                     <Image
                       src={`/images/venues/uploads/${show.image}`}
                       alt={show.title}
@@ -39,7 +39,7 @@ const Shows = ({ shows }) => {
                       <div className='project-category text-white-50'>{show.date}</div>
                       <div className='project-name'>{show.venue}</div>
                     </div>
-                  </a>
+                  </div>
                 </Link>
               </div>
             ))}

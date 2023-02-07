@@ -24,21 +24,18 @@ const Contact = () => {
       email: Yup.string().required('Sorry the email is required').email('This is not a valid email'),
       message: Yup.string().required('Sorry the name is required'),
     }),
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true)
 
-      axios
-        .post('/api/email/contact', values)
-        .then(() => {
-          dispatch(successGlobal('Thank you!!'))
-        })
-        .catch((error) => {
-          dispatch(errorGlobal('Error try later'))
-        })
-        .finally(() => {
-          resetForm()
-          setLoading(false)
-        })
+      try {
+        axios.post('/api/email/contact', values)
+        dispatch(successGlobal('Thank you!!'))
+      } catch (error) {
+        dispatch(errorGlobal('Error try later'))
+      } finally {
+        resetForm()
+        setLoading(false)
+      }
     },
   })
 

@@ -8,13 +8,20 @@ const RouteGuard = ({ children }) => {
   const router = useRouter()
 
   useEffect(() => {
-    getSession().then((session) => {
-      if (!session) {
-        router.push('/users/sign_in')
-      } else {
+    const loadSession = async () => {
+      try {
+        const session = await getSession()
+        if (!session) {
+          router.push('/users/sign_in')
+        } else {
+          setLoading(false)
+        }
+      } catch (error) {
+        console.log(error)
         setLoading(false)
       }
-    })
+    }
+    loadSession()
   }, [])
 
   if (loading) {

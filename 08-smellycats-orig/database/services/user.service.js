@@ -1,13 +1,13 @@
 import User from 'database/models/user.model'
 
 export const userExists = async (email) => {
-  const checkUser = await User.findOne({ email: email })
+  const checkUser = await User.findOne({ email })
   if (checkUser) return true
   return false
 }
 
 export const findUserByEmail = async (email, select) => {
-  return await User.findOne({ email: email }).select(select)
+  return await User.findOne({ email }).select(select)
 }
 
 export const updateUser = async (_id, body) => {

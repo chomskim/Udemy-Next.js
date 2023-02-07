@@ -20,21 +20,19 @@ const ShowsPage = (props) => {
     500: 1,
   }
 
-  const loadMorePosts = () => {
+  const loadMorePosts = async () => {
     const skip = shows.length
 
-    axios
-      .get(`/api/shows/getAll?limit=3&skip=${skip}`)
-      .then((response) => {
-        const newState = [...shows, ...response.data.shows]
-        setShow(newState)
-        if (response.data.shows.length <= 0) {
-          setNoMore(true)
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    try {
+      const response = await axios.get(`/api/shows/getAll?limit=3&skip=${skip}`)
+      const newState = [...shows, ...response.data.shows]
+      setShow(newState)
+      if (response.data.shows.length <= 0) {
+        setNoMore(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

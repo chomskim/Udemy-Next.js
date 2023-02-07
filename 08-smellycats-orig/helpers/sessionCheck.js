@@ -11,21 +11,20 @@ const SessionCheck = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getSession()
-      .then((session) => {
+    const loadSession = async () => {
+      try {
+        const session = await getSession()
         if (session) {
-          dispatch(autoSignIn())
-            .unwrap()
-            .then(() => {
-              setLoading(false)
-            })
+          await dispatch(autoSignIn()).unwrap()
+          setLoading(false)
         } else {
           setLoading(false)
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         setLoading(false)
-      })
+      }
+    }
+    loadSession()
   }, [])
 
   if (loading) return <Loader />

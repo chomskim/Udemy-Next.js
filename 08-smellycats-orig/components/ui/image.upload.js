@@ -1,8 +1,9 @@
 import axios from 'axios'
-import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react'
+import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react'
+// import Image from 'next/image'
 
 const UploadHandler = forwardRef((props, ref) => {
-  const imageInputRef = React.useRef()
+  const imageInputRef = useRef()
   const [createObjectURL, setCreateObjectURL] = useState(null)
 
   useImperativeHandle(ref, () => ({
@@ -14,15 +15,15 @@ const UploadHandler = forwardRef((props, ref) => {
 
   const showImage = (event) => {
     if (event.target.files && event.target.files[0]) {
-      const img = event.target.files[0]
-      setCreateObjectURL(URL.createObjectURL(img))
-      uploadImage(img)
+      const imgFile = event.target.files[0]
+      setCreateObjectURL(URL.createObjectURL(imgFile))
+      uploadImage(imgFile)
     }
   }
 
-  const uploadImage = async (img) => {
+  const uploadImage = async (imgFile) => {
     const body = new FormData()
-    body.append('file', img)
+    body.append('file', imgFile)
 
     try {
       const request = await axios.post('/api/uploads/image', body)
@@ -42,6 +43,8 @@ const UploadHandler = forwardRef((props, ref) => {
 
   return (
     <div className='file-uploader'>
+      {/* <Image src={createObjectURL} layout='responsive' width='1920' height='1080' /> */}
+
       <img src={createObjectURL} />
       <div className='form-group'>
         <input type='file' name='myImage' ref={imageInputRef} onChange={showImage} />

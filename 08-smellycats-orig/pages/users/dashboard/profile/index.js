@@ -27,16 +27,14 @@ const UserProfile = () => {
       firstname: Yup.string().required('Sorry the firstname is required').min(2, '2 char min').max(50, '50 char max'),
       lastname: Yup.string().required('Sorry the lastname is required').min(2, '2 char min').max(50, '50 char nax'),
     }),
-    onSubmit: (values) => {
-      axios
-        .patch('/api/users/user', values)
-        .then((response) => {
-          dispatch(updateUserProfile(response.data))
-          dispatch(successGlobal('Updated!!'))
-        })
-        .catch((error) => {
-          dispatch(errorGlobal(error.response.data.message))
-        })
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.patch('/api/users/user', values)
+        dispatch(updateUserProfile(response.data))
+        dispatch(successGlobal('Updated!!'))
+      } catch (error) {
+        dispatch(errorGlobal(error.response.data.message))
+      }
     },
   })
 

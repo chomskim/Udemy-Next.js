@@ -4,11 +4,11 @@ import Footer from 'components/navigation/footer'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const MainLayout = (props) => {
+const MainLayout = ({ children }) => {
   return (
     <>
       <Header />
-      {props.children}
+      {children}
       <ToastContainer />
       <Footer />
     </>

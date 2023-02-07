@@ -40,26 +40,23 @@ const EditShowPage = ({ show }) => {
       time: show.time,
     },
     validationSchema: showValidation,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true)
       /// edit //
-      axios
-        .patch('/api/shows/edit', {
+      try {
+        const response = await axios.patch('/api/shows/edit', {
           data: values,
           current: show.slug,
         })
-        .then((response) => {
-          if (response.data.slug !== router.query.slug) {
-            router.push(`/users/dashboard/shows/${response.data.slug}`)
-          }
-          dispatch(successGlobal('Edited !!'))
-        })
-        .catch((error) => {
-          dispatch(errorGlobal(error.response.data.message))
-        })
-        .finally(() => {
-          setLoading(false)
-        })
+        if (response.data.slug !== router.query.slug) {
+          router.push(`/users/dashboard/shows/${response.data.slug}`)
+        }
+        dispatch(successGlobal('Edited !!'))
+      } catch (error) {
+        dispatch(errorGlobal(error.response.data.message))
+      } finally {
+        setLoading(false)
+      }
       /// edit ///
     },
   })

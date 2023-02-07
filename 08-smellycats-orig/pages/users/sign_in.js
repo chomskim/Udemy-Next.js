@@ -48,13 +48,20 @@ const SignIn = () => {
   }
 
   useEffect(() => {
-    getSession().then((session) => {
-      if (session) {
-        router.push('/users/dashboard')
-      } else {
+    const loadSession = async () => {
+      try {
+        const session = await getSession()
+        if (session) {
+          router.push('/users/dashboard')
+        } else {
+          setCheck(false)
+        }
+      } catch (error) {
+        console.log(error)
         setCheck(false)
       }
-    })
+    }
+    loadSession()
   }, [])
 
   return (
